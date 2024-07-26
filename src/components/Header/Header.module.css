@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: teal;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.link {
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.active {
+  color: color-mix(in srgb-linear, color percentage, color percentage);
+}
