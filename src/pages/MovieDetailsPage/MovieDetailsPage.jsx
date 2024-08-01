@@ -1,6 +1,4 @@
-import { NavLink, useLocation, useParams } from 'react-router-dom';
-import MovieCast from '../../components/MovieCast/MovieCast';
-import MovieReviews from '../../components/MovieReviews/MovieReviews';
+import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchMovieDetails } from '../../services/api';
 import { defaultImg } from '../../services/constants';
@@ -44,8 +42,11 @@ const MovieDetailsPage = () => {
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
           <p>Release date: {movie.release_date}</p>
-          <MovieCast />
-          <MovieReviews />
+          <ul>
+            <li><NavLink to="cast">Cast</NavLink></li>
+            <li><NavLink to="reviews">Reviews</NavLink></li>
+          </ul>
+         <Outlet/>
         </div>
       )}
     </div>
