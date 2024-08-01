@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import { searchMovies } from '../../services/api';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
+import s from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -30,9 +31,11 @@ const MoviesPage = () => {
   return (
     <>
       <SearchForm initialValues={{ query }} onSubmit={handleSearchSubmit} />
-      <ul>
+      <ul className={s.moviesList}>
         {movies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id} className={s.movieItem}>
+            <NavLink to={`/movies/${movie.id}`} className={s.movieLink}>{movie.title}</NavLink>
+          </li>
         ))}
       </ul>
     </>
