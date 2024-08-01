@@ -1,0 +1,31 @@
+.cast {
+  color: var(--color);
+  background-color: var(--background-color);
+  padding: 20px;
+}
+
+.cast h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.cast ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cast ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.cast ul li img {
+  border-radius: 8px;
+  margin-right: 1em;
+}
+
+.cast ul li p {
+  margin: 0;
+  font-size: 1em;
+}

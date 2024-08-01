@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieCredits } from "../../services/api";
 import { defaultImg } from "../../services/constants";
+import s from './MovieCast.module.css';
 
 const MovieCast = () => {
 const {movieId} = useParams();
@@ -23,23 +24,24 @@ getCast();
 }, [movieId]);
 
   return (
-    <div>
-      <h2>Cast</h2>
-      {error && <p>{error}</p>}
+    <div  className={s.cast}>
+      <h2 className={s.title}>Cast</h2>
+      {error && <p className={s.error}>{error}</p>}
       {cast.length > 0 ? (
-        <ul>
+        <ul className={s.castList}>
           {cast.map(actor => (
-            <li key={actor.cast_id}>
+            <li key={actor.cast_id} className={s.castItem}>
               <img src={actor.profile_path ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : defaultImg}
               alt={actor.name}
-              width={100} />
-              <p>{actor.name}</p>
-              <p>Character: {actor.character}</p>
+              width={100} 
+              className={s.castImage}/>
+              <p className={s.actorName}>{actor.name}</p>
+              <p className={s.actorCharacter}>Character: {actor.character}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No cast information available</p>
+        <p className={s.noInfo}>No cast information available</p>
       )} 
     </div>
   )

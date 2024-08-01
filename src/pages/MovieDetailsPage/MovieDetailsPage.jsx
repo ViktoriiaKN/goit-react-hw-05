@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchMovieDetails } from '../../services/api';
 import { defaultImg } from '../../services/constants';
+import s from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -25,11 +26,11 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <NavLink to={backlink}>Back</NavLink>
-      {error && <p>{error}</p>}
+    <div className={s.movieDetails}>
+      <NavLink to={backlink} className={s.backLink}>Back</NavLink>
+      {error && <p className={s.error}>{error}</p>}
       {movie && (
-        <div>
+        <div  className={s.movieContent}>
           <img
             src={
               movie.poster_path
@@ -38,13 +39,14 @@ const MovieDetailsPage = () => {
             }
             alt={movie.title}
             width={250}
+            className={s.movieImage}
           />
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-          <p>Release date: {movie.release_date}</p>
-          <ul>
-            <li><NavLink to="cast">Cast</NavLink></li>
-            <li><NavLink to="reviews">Reviews</NavLink></li>
+          <h1 className={s.movieTitle}>{movie.title}</h1>
+          <p className={s.movieOverview}>{movie.overview}</p>
+          <p className={s.movieReleaseDate}>Release date: {movie.release_date}</p>
+          <ul className={s.additionalInfo}>
+            <li className={s.additionalInfoItem}><NavLink to="cast" className={s.additionalInfoLink}>Cast</NavLink></li>
+            <li className={s.additionalInfoItem}><NavLink to="reviews" className={s.additionalInfoLink}>Reviews</NavLink></li>
           </ul>
          <Outlet/>
         </div>
