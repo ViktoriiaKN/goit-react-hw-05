@@ -1,12 +1,15 @@
-import { useEffect } from "react"
+import { NavLink } from "react-router-dom"
 
-const MovieList = () => {
-useEffect(() => {
-
-}, []);
+const MovieList = ({movies}) => {
 
   return (
-    <div>Movie List</div>
+    <ul>
+      {movies.map(movie => (
+        <li key={movie.id}>
+          <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
+        </li>
+      ))}
+    </ul>
   )
 }
 
