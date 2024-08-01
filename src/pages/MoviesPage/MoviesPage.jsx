@@ -1,32 +1,41 @@
-import { useState } from "react";
-import SearchForm from "../../components/SearchForm/SearchForm";
-import * as Yup from 'yup';
-import { Formik } from "formik";
+import { useEffect, useState } from 'react';
+import SearchForm from '../../components/SearchForm/SearchForm';
+import { searchMovies } from '../../services/api';
 
 const MoviesPage = () => {
-  const [filter, setFilter] = useState('');
-/* const [searchParams, setSearchParams] = useState(''); */
-const initialValues = {name: '',};
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useState();
 
-const validationSchema = Yup.object({
-  name: Yup.string().min(3).max(50).required(),
-})
+  const query = searchParams.get('query') || '';
 
-const handleFilterChange = (e) => {
-  setFilter(e.target.value);
-};
+  useEffect(() => {
+    const fetchMovies = async () => {
+      if (!query) return;
 
-  /* const handleSubmit= value => {
-    setSearchParams({ query: value });
-    };   */
+      try {
+        const results = await searchMovies(query);
+        setMovies(results);
+      } catch (error) {
+        console.error('Failed to fetch movies:', error);
+      }
+      fetchMovies();
+    };
+  }, [query]);
+
+  const handleSearchSubmit = ({ query }) => {
+    setSearchParams({ query });
+  };
 
   return (
     <>
-    <Formik initialValues={initialValues} validationSchema={validationSchema}>
-<SearchForm filter={filter} handleFilterChange={handleFilterChange}/>
-    </Formik>
+      <SearchForm initialValues={{ query }} onSubmit={handleSearchSubmit} />
+      <ul>
+        {movies.map((movie) => (
+          <li key={movie.id}>{movie.title}</li>
+        ))}
+      </ul>
     </>
-  )
-}
+  );
+};
 
-export default MoviesPage
+export default MoviesPage;
