@@ -8,12 +8,12 @@ const validationSchema = Yup.object({
 const SearchForm = ({initialValues, onSubmit}) => {
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <Form>
     <Field 
     as='input'
     text='text'
-    name='filter'
+    name='query'
     placeholder='Search movies'
     />
     <ErrorMessage name="query" component="div"/>

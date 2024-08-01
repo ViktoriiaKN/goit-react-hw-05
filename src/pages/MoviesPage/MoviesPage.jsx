@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import { searchMovies } from '../../services/api';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get('query') || '';
 
@@ -18,8 +19,8 @@ const MoviesPage = () => {
       } catch (error) {
         console.error('Failed to fetch movies:', error);
       }
-      fetchMovies();
     };
+    fetchMovies();
   }, [query]);
 
   const handleSearchSubmit = ({ query }) => {
